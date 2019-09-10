@@ -15,6 +15,13 @@ function loop()
 
 $abc = loop();
 
-$abc();
+$res = $abc();
+var_dump($res);
+echo PHP_EOL;
+$i = 0;
+while($abc()){//死循环，按ctrl + c 或者 kill掉进程可退出循环
+    $i++;
+    echo $i . PHP_EOL;
+}
 
 echo 'finish' . PHP_EOL;
