@@ -15,16 +15,15 @@ function loop()
 
 $abc = loop();
 
-$res = $abc();
-var_dump($res);
-echo PHP_EOL;
+$abc->start();//启动
 
 $i = 0;
-while($abc()){//死循环,自动重启，按ctrl + c 或者 kill掉进程可退出循环
+while($abc->running()){//死循环,按ctrl + c 或者 kill掉进程可退出循环,或者通过调用代码停止
     $i++;
     echo $i . PHP_EOL;
     if($i>=50000) {
-        $abc->stop();//停止，但永远停止不掉，因为while调用之后自动重启，只能通过信号停止，如：ctrl+c停止
+        echo PHP_EOL . '主动触发stop' . PHP_EOL;
+        $abc->stop();//停止
     }
 }
 
