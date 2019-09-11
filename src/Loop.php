@@ -15,11 +15,11 @@ class Loop
         $signal = Signal::getInstance();
         $signal->on(SIGHUP, SIG_IGN);
         $signal->on(SIGPIPE, SIG_IGN);
-        $signal->on(SIGINT, [$this, 'stop']);//停止信号
-        $signal->on(SIGQUIT, [$this, 'stop']);
-        $signal->on(SIGTERM, [$this, 'stop']);
+        $signal->on(SIGINT, [$this, 'stop']);//停止信号，Ctrl+C
+        $signal->on(SIGQUIT, [$this, 'stop']);//退出
+        $signal->on(SIGTERM, [$this, 'stop']);//kill 命令杀掉进程
     }
-
+    //等待信号处理同时返回是否运行状态
     public function running()
     {
         Signal::getInstance()->dispatch();
@@ -33,13 +33,13 @@ class Loop
     {
         $this->running = false;
     }
-    //标记为运行状态
+    //标记为运行状态，启动
     public function start()
     {
         $this->running = true;
         return $this;
     }
-    //标记未运行
+    //标记未运行，重置
     public function reset()
     {
         $this->running = false;
