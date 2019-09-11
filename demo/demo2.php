@@ -21,7 +21,7 @@ $i = 0;
 while($abc->running()){//死循环,按ctrl + c 或者 kill掉进程可退出循环,或者通过调用代码停止
     $i++;
     echo $i . PHP_EOL;
-    if($i>=50000) {
+    if($i>=500000) {
         echo PHP_EOL . '主动触发stop' . PHP_EOL;
         $abc->stop();//停止
     }
